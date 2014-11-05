@@ -1133,7 +1133,7 @@ $.extend feedbin,
 
 
     swipe: ->
-      $(".app-wrap").swipe
+      $(".feeds-column, .entries-column, .entry-column").swipe
         swipeLeft: (event, direction, distance, duration, fingerCount) ->
             if $('body').hasClass('nothing-selected')
               $('body').removeClass('nothing-selected')
