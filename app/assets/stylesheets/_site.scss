@@ -1342,6 +1342,8 @@ Structure
 		width: 245px;
 		flex-grow: 0;
 		border-right: 1px solid transparent;
+		transition: width .2s ease;
+		overflow: hidden;
 		@include border-color($border-color, $border-color-night, $border-color-sunset);
 	}
 	.entries-column {
@@ -5227,7 +5229,10 @@ Print
 Fullscreen
 ------------------------------------------------------------------------------*/
 .full-screen {
-	.feeds-column, .entries-column, .account-toolbar {
+	.feeds-column, .entries-column {
+		width: 0 !important;
+	}
+	.account-toolbar {
 		display: none;
 	}
 	.entry-content-wrap {
@@ -5465,7 +5470,8 @@ Media Queries
     }
     .entry-selected {
 		.feeds-column {
-			display: none;
+			width: 0 !important;
+			border-right: none;
 		}
 		.entries-inner {
 	        top: $toolbar-height;
@@ -5500,33 +5506,53 @@ Media Queries
 }
 
 @media (max-width: 550px) {
+	html,
+	body {
+		width: 100vw !important;
+		overflow: hidden !important;
+		display: block !important;
+		min-width: 100vw !important
+	}
+	.app-wrap {
+		position: absolute;
+		top: 0;
+		left: 0;
+		transition: left .2s ease;
+		display: block;
+		width: 300vw;
+	}
+	.nothing-selected,
+	.feed-selected,
+	.entry-selected {
+		.feeds-column,
+		.entries-column,
+		.entry-column {
+			border-right: none !important;
+			width: 100vw !important;
+			display: block !important;
+			float: left;
+		}
+	}
 	.hamburger-menu,
 	.desktop-hide {
 		display: block !important;
 	}
-    .nothing-selected {
-		.feeds-column {
-			flex-grow: 1;
-			border-right: none;
-		}
-		.ui-resizable-handle,
-		.entry-column,
-		.entries-column {
-	        display: none;
-	    }
-    }
-	.feed-selected {
-		.entries-header {
-			display: block;
-		}
-		.feeds-column {
-	        display: none;
-	    }
+	.entries-header {
+		display: block;
 	}
-    .entry-selected {
-		.feeds-column,
-		.entries-column {
-			display: none;
+	.feed-selected {
+		.app-wrap {
+			left: -100vw;
+		}
+	}
+	.entry-selected {
+		.app-wrap {
+			left: -200vw;
+		}
+	}
+    .nothing-selected {
+		.ui-resizable-handle {
+	        display: none;
 		}
     }
 	.entry-toolbar {

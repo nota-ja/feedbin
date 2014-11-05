@@ -1132,6 +1132,27 @@ $.extend feedbin,
         $('.share-form .description-placeholder').attr('placeholder', description)
 
 
+    swipe: ->
+      $(".app-wrap").swipe
+        swipeLeft: (event, direction, distance, duration, fingerCount) ->
+            if $('body').hasClass('nothing-selected')
+              $('body').removeClass('nothing-selected')
+              $('body').addClass('feed-selected')
+            else if $('body').hasClass('feed-selected')
+              $('body').removeClass('feed-selected')
+              $('body').addClass('entry-selected')
+
+        swipeRight: (event, direction, distance, duration, fingerCount) ->
+            if $('body').hasClass('entry-selected')
+              $('body').removeClass('entry-selected')
+              $('body').addClass('feed-selected')
+            else if $('body').hasClass('feed-selected')
+              $('body').removeClass('feed-selected')
+              $('body').addClass('nothing-selected')
+
+        event.preventDefault()
+
+
 jQuery ->
   $.each feedbin.init, (i, item) ->
     item()
