@@ -40,7 +40,7 @@ Feedbin::Application.configure do
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = true unless (ENV["FORCE_SSL"] && (ENV["FORCE_SSL"].downcase == "false"))
 
   # Less verbose logs
   config.lograge.enabled = true
