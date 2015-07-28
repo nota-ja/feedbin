@@ -1,0 +1,12 @@
+---
+applications:
+- name: feedbin
+  memory: 1344m
+  command: './cf-startup.sh'
+  env:
+    DATABASE_URL: postgres://feedbin:feedbin100@192.168.15.91:5442/feedbin
+    REDIS_URL: redis://redis:c227fdd7-ed24-4e62-aa27-0a11765edf54@10.244.3.46:39039
+    FORCE_SSL: false
+    SERVE_STATIC_ASSETS: true
+    PUSH_URL: https://feedbin.10.244.0.34.xip.io
+    SECRET_KEY_BASE: 3ccac264399989430f06deafaf796faf1a357fcb505125c9c783b200ef70c02451e250a54d288edb4340b6af4a688b65e04fdb39f4b9318199ec4c0a34569ad6
